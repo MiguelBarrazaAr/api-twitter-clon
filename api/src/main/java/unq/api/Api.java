@@ -1,13 +1,20 @@
 package unq.api;
 
+import org.unq.ui.model.TwitterSystem;
+
 import io.javalin.Javalin;
 
-public class Api
+public final class Api {
+	TwitterSystem system;
+	Javalin app; 
 
-{
-    public static void main( String[] args )
-    {
-        Javalin app = Javalin.create().start(7000);
-        app.get("/", ctx -> ctx.result("Hello World"));
-    }
+	public Api() {
+		this.system = new TwitterSystem();
+	}
+
+	public void run(int port) {
+		this.app = Javalin.create().start(port);
+		this.app.get("/", ctx -> ctx.result("Hello World"));
+	}
+
 }
